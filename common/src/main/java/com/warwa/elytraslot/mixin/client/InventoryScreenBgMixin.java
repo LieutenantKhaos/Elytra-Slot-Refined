@@ -20,6 +20,20 @@ public abstract class InventoryScreenBgMixin extends AbstractContainerScreen<Inv
     private static final Identifier CURIOS_INVENTORY_TEXTURE =
             Identifier.fromNamespaceAndPath("elytraslot", "textures/gui/inventory_panel.png");
 
+    /**
+     * Extend the click boundary to include our elytra slot panel to the left.
+     * Without this, clicks on the elytra slot are treated as "outside" the inventory
+     * and the item gets dropped instead of picked up.
+     */
+    @Override
+    protected boolean hasClickedOutside(double mx, double my, int xo, int yo) {
+        // If click is within the elytra slot panel area (33px to the left), it's NOT outside
+        if (mx >= xo - 33 && mx < xo && my >= yo && my < yo + 32) {
+            return false;
+        }
+        return super.hasClickedOutside(mx, my, xo, yo);
+    }
+
     @Inject(method = "extractBackground", at = @At("TAIL"))
     private void elytraslot(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
         int x = this.leftPos;

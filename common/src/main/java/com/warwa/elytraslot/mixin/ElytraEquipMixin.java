@@ -31,6 +31,13 @@ public class ElytraEquipMixin {
 
         IElytraSlotPlayer slotPlayer = (IElytraSlotPlayer) player;
         ItemStack existing = slotPlayer.elytraslot_getElytraStack();
+
+        // Block if custom slot already has an elytra
+        if (ElytraSlotUtil.isElytraLike(existing)) {
+            cir.setReturnValue(InteractionResult.FAIL);
+            return;
+        }
+
         ItemStack toEquip = stack.getCount() <= 1 ? stack.copyAndClear() : stack.consumeAndReturn(1, player);
 
         slotPlayer.elytraslot_setElytraStack(toEquip);
