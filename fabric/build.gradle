@@ -1,0 +1,36 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.fabricmc.fabric-loom'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "${mod_id}-fabric-${minecraft_version}"
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    // No mappings needed - MC 26.1 ships with real names
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+}
+
+loom {
+    def aw = project(':common').file("src/main/resources/elytraslot.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
+
+    runs {
+        client {
+            runDir('runs/client')
+            ideConfigGenerated(true)
+        }
+        server {
+            runDir('runs/server')
+            ideConfigGenerated(true)
+        }
+    }
+}

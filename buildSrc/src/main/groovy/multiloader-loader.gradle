@@ -1,0 +1,41 @@
+plugins {
+    id 'multiloader-common'
+}
+
+configurations {
+    var commonJava = register('commonJava') {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    var commonResources = register('commonResources') {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    implementation {
+        extendsFrom(configurations.named('commonJava').get())
+    }
+}
+
+dependencies {
+    commonJava project(path: ':common', configuration: 'commonJava')
+    commonResources project(path: ':common', configuration: 'commonResources')
+    compileOnly project(':common')
+}
+
+tasks.named('compileJava', JavaCompile).configure {
+    dependsOn(configurations.named('commonJava'))
+    source(configurations.named('commonJava'))
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    from(configurations.named('commonResources'))
+}
+
+tasks.named('javadoc', Javadoc).configure {
+    source(configurations.named('commonJava'))
+}
+
+tasks.named('sourcesJar', Jar).configure {
+    from(configurations.named('commonJava'))
+    from(configurations.named('commonResources'))
+}

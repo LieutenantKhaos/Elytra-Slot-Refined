@@ -1,0 +1,76 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(project.java_version as int)
+
+base {
+    archivesName = "${mod_id}-${project.name}-${minecraft_version}"
+}
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title'     : mod_name,
+            'Specification-Vendor'    : mod_author,
+            'Specification-Version'   : mod_version,
+            'Implementation-Title'    : mod_name,
+            'Implementation-Version'  : mod_version,
+            'Implementation-Vendor'   : mod_author,
+            'Implementation-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(new Date()),
+        ])
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+    exclusiveContent {
+        forRepository { maven { url = uri('https://repo.spongepowered.org/repository/maven-public') } }
+        filter { includeGroupAndSubgroups('org.spongepowered') }
+    }
+    maven { url = uri('https://maven.blamejared.com') }
+}
+
+processResources {
+    var replaceProperties = [
+        minecraft_version      : minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        neoforge_version       : findProperty('neoforge_version') ?: '',
+        neoforge_loader_version_range: findProperty('neoforge_loader_version_range') ?: '',
+        fabric_loader_version  : findProperty('fabric_loader_version') ?: '',
+        fabric_version         : findProperty('fabric_version') ?: '',
+        mod_id                 : mod_id,
+        mod_name               : mod_name,
+        mod_license            : mod_license,
+        mod_version            : mod_version,
+        mod_author             : mod_author,
+        mod_group_id           : mod_group_id,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['*.toml', '*.json', 'fabric.mod.json', '*.cfg']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

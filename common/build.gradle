@@ -1,0 +1,38 @@
+plugins {
+    id 'multiloader-common'
+    id 'net.neoforged.moddev'
+}
+
+version = mod_version
+group = mod_group_id
+
+neoForge {
+    neoFormVersion = project.neo_form_version
+    // No parchment needed - MC 26.1 ships with real names
+
+    // Access transformers for common compilation
+    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+}
+
+dependencies {
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
+    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
+}
+
+// Publish common sources for loader modules to consume
+configurations {
+    register('commonJava') {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    register('commonResources') {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava(sourceSets.main.java.sourceDirectories.singleFile)
+    commonResources(sourceSets.main.resources.sourceDirectories.singleFile)
+}
