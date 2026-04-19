@@ -11,6 +11,9 @@
     "entrypoints": {
         "main": [
             "com.warwa.elytraslot.fabric.ElytraSlotModFabric"
+        ],
+        "client": [
+            "com.warwa.elytraslot.fabric.ElytraSlotModFabricClient"
         ]
     },
     "mixins": [

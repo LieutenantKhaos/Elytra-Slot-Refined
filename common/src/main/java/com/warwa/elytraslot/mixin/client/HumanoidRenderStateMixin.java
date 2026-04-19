@@ -13,6 +13,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Populates the custom-slot elytra field on {@link HumanoidRenderState} (via the
+ * {@link IElytraHolder} interface mixed in by
+ * {@code HumanoidRenderStateAccessorMixin}) at render-state extraction time. Fires
+ * once per Player render-state build from {@code HumanoidMobRenderer.extractHumanoidRenderState},
+ * which is also invoked by {@code AvatarRenderer.extractRenderState} for players.
+ */
 @Mixin(HumanoidMobRenderer.class)
 public class HumanoidRenderStateMixin {
 

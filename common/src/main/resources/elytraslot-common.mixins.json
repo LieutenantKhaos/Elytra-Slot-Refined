@@ -1,20 +1,23 @@
 {
     "required": true,
     "package": "com.warwa.elytraslot.mixin",
-    "compatibilityLevel": "JAVA_25",
+    "compatibilityLevel": "JAVA_21",
     "mixins": [
         "PlayerElytraStorageMixin",
+        "ServerPlayerCloneMixin",
         "ElytraSlotMixin",
         "ElytraExclusiveMixin",
         "ElytraEquipMixin",
         "InventoryMenuMixin",
-        "InventoryMenuQuickMoveMixin"
+        "InventoryMenuQuickMoveMixin",
+        "LivingEntityAccessor"
     ],
     "client": [
         "client.ElytraLayerMixin",
         "client.HumanoidRenderStateMixin",
         "client.HumanoidRenderStateAccessorMixin",
-        "client.InventoryScreenBgMixin"
+        "client.InventoryScreenBgMixin",
+        "client.CapeLayerMixin"
     ],
     "injectors": {
         "defaultRequire": 1
