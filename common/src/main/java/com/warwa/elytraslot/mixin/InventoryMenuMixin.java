@@ -30,6 +30,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  *       Binding), matching vanilla {@code ArmorSlot.mayPickup} (UI2 fix).</li>
  *   <li>{@link Slot#getNoItemIcon} — points at our empty-slot elytra sprite.</li>
  * </ul>
+ *
+ * <p>The slot's index in the menu is exposed as
+ * {@link com.warwa.elytraslot.ElytraSlotConstants#ELYTRA_SLOT_INDEX} (46).
  */
 @Mixin(InventoryMenu.class)
 public abstract class InventoryMenuMixin {
