@@ -1,19 +1,23 @@
 {
     "schemaVersion": 1,
-    "id": "elytraslot",
+    "icon": "icon.png",
+    "id": "${mod_id}",
     "version": "${mod_version}",
-    "name": "Elytra Slot",
-    "description": "Adds a dedicated inventory slot for the elytra, allowing elytra + chest armor.",
-    "authors": ["warwa"],
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "authors": ["${mod_author}"],
     "contact": {},
-    "license": "All Rights Reserved",
+    "license": "${mod_license}",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.warwa.elytraslot.fabric.ElytraSlotModFabric"
+            "com.warwa.elytraslot.fabric.ElytraSlotFabric"
         ],
         "client": [
-            "com.warwa.elytraslot.fabric.ElytraSlotModFabricClient"
+            "com.warwa.elytraslot.fabric.ElytraSlotFabricClient"
+        ],
+        "modmenu": [
+            "com.warwa.elytraslot.fabric.ElytraSlotModMenu"
         ]
     },
     "mixins": [
@@ -21,8 +25,8 @@
     ],
     "accessWidener": "elytraslot.accesswidener",
     "depends": {
-        "fabricloader": ">=0.18.0",
-        "minecraft": ">=26.1",
+        "fabricloader": ">=${fabric_loader_version}",
+        "minecraft": ">=${minecraft_version}",
         "fabric-api": "*"
     }
 }

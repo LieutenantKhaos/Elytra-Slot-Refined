@@ -3,24 +3,29 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
-version = mod_version
-group = mod_group_id
-
 neoForge {
+    // Compile common against vanilla Minecraft (NeoForm), no loader APIs.
+    // MC 26.2 ships real names, so no mappings are involved.
     neoFormVersion = project.neo_form_version
-    // No parchment needed - MC 26.1 ships with real names
 
-    // Access transformers for common compilation
+    // Single physical copy of the access transformer; the neoforge module references this
+    // same file, and it ships inside both jars via commonResources at the standard path.
     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 }
 
 dependencies {
+    // Soft compat: Trinkets Updated (pb4 fork, universal jar — runs on Fabric AND NeoForge).
+    // compileOnly + runtime-gated by isModLoaded; all eu.pb4.trinkets references live in
+    // com.warwa.elytraslot.compat.trinkets so the classes only load when Trinkets is installed.
+    // Mirrored in fabric/ and neoforge/ because each loader re-compiles common sources.
+    compileOnly "eu.pb4:trinkets:${trinkets_version}"
+
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
 }
 
-// Publish common sources for loader modules to consume
+// Expose the raw source/resource directories for the loader modules to re-compile.
 configurations {
     register('commonJava') {
         canBeResolved = false

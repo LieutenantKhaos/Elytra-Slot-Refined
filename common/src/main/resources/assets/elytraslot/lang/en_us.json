@@ -1,3 +1,14 @@
 {
-    "elytraslot.slot.elytra": "Elytra"
+    "trinkets.slot.chest.elytra": "Elytra",
+    "curios.identifier.elytra": "Elytra",
+    "elytraslot.disconnect.missingMod": "This server requires the Elytra Slot mod.",
+    "elytraslot.config.title": "Elytra Slot",
+    "elytraslot.config.showPanel": "Show elytra slot in inventory",
+    "elytraslot.config.showPanel.tooltip": "Only used while Trinkets or Curios provides the elytra slot. Without them the slot is always shown. On a server, the server's setting wins.",
+    "elytraslot.config.provider": "Elytra slot provider",
+    "elytraslot.config.provider.tooltip": "Where the elytra slot lives: auto picks Trinkets, then Curios, then the built-in slot. Takes effect after restarting the game.",
+    "elytraslot.config.provider.auto": "Auto",
+    "elytraslot.config.provider.builtin": "Built-in",
+    "elytraslot.config.provider.trinkets": "Trinkets",
+    "elytraslot.config.provider.curios": "Curios"
 }

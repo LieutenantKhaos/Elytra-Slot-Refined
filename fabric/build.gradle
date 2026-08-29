@@ -3,25 +3,38 @@ plugins {
     id 'net.fabricmc.fabric-loom'
 }
 
-version = mod_version
-group = mod_group_id
-
-base {
-    archivesName = "${mod_id}-fabric-${minecraft_version}"
+repositories {
+    // UniversalGraves (maven.modrinth:universal-graves) is published to Modrinth's maven.
+    maven {
+        name = 'Modrinth'
+        url = uri('https://api.modrinth.com/maven')
+        content { includeGroup 'maven.modrinth' }
+    }
+    // ModMenu (com.terraformersmc:modmenu) for the in-game config screen.
+    maven {
+        name = 'TerraformersMC'
+        url = uri('https://maven.terraformersmc.com/releases')
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    // No mappings needed - MC 26.1 ships with real names
+    // No mappings line — MC 26.2 ships real names.
     implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+    // Soft compat, all compileOnly + runtime-gated by isModLoaded:
+    compileOnly "eu.pb4:trinkets:${trinkets_version}"
+    compileOnly "maven.modrinth:universal-graves:${universal_graves_version}"
+    compileOnly "com.terraformersmc:modmenu:${modmenu_version}"
 }
 
 loom {
-    def aw = project(':common').file("src/main/resources/elytraslot.accesswidener")
-    if (aw.exists()) {
-        accessWidenerPath.set(aw)
+    def aw = project(':common').file('src/main/resources/elytraslot.accesswidener')
+    if (!aw.exists()) {
+        throw new GradleException("Missing access widener: ${aw} (declared in fabric.mod.json)")
     }
+    accessWidenerPath.set(aw)
 
     runs {
         client {
@@ -33,4 +46,9 @@ loom {
             ideConfigGenerated(true)
         }
     }
+}
+
+// The access transformer is NeoForge-only; keep it out of the Fabric jar.
+processResources {
+    exclude 'META-INF/accesstransformer.cfg'
 }

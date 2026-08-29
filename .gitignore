@@ -1,7 +1,26 @@
-build/
+# Gradle
 .gradle/
-run/
+build/
+buildSrc/build/
+buildSrc/.gradle/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+bin/
+
+# Dev runs
 runs/
-*.class
-*.jar
-!gradle/wrapper/gradle-wrapper.jar
+run/
+fabric/runs/
+neoforge/run/
+
+# Generated
+neoforge/src/generated/
+
+# Third-party jars used for local compat testing
+testmods/

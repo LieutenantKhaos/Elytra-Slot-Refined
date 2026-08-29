@@ -1,0 +1,6 @@
+{
+  "order": -384,
+  "icon": "elytraslot:container/slot/elytra",
+  "validators": ["elytraslot:glider"],
+  "entities": ["#curios:player_like"]
+}

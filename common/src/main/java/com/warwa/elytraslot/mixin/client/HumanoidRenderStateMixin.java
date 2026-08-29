@@ -1,44 +1,24 @@
 package com.warwa.elytraslot.mixin.client;
 
-import com.warwa.elytraslot.ElytraSlotUtil;
-import com.warwa.elytraslot.IElytraHolder;
-import com.warwa.elytraslot.IElytraSlotPlayer;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import com.warwa.elytraslot.client.ElytraRenderHolder;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.Unique;
 
-/**
- * Populates the custom-slot elytra field on {@link HumanoidRenderState} (via the
- * {@link IElytraHolder} interface mixed in by
- * {@code HumanoidRenderStateAccessorMixin}) at render-state extraction time. Fires
- * once per Player render-state build from {@code HumanoidMobRenderer.extractHumanoidRenderState},
- * which is also invoked by {@code AvatarRenderer.extractRenderState} for players.
- */
-@Mixin(HumanoidMobRenderer.class)
-public class HumanoidRenderStateMixin {
+@Mixin(HumanoidRenderState.class)
+public abstract class HumanoidRenderStateMixin implements ElytraRenderHolder {
 
-    @Inject(method = "extractHumanoidRenderState", at = @At("TAIL"))
-    private static void onExtractHumanoidRenderState(
-        LivingEntity entity,
-        HumanoidRenderState state,
-        float partialTick,
-        net.minecraft.client.renderer.item.ItemModelResolver itemModelResolver,
-        CallbackInfo ci
-    ) {
-        if (!(entity instanceof Player player)) return;
-        if (!(state instanceof IElytraHolder holder)) return;
+    @Unique
+    private ItemStack elytraslot$elytra = ItemStack.EMPTY;
 
-        holder.elytraslot_setAccessoriesElytra(ItemStack.EMPTY);
+    @Override
+    public ItemStack elytraslot$getElytra() {
+        return this.elytraslot$elytra;
+    }
 
-        ItemStack elytra = ((IElytraSlotPlayer) player).elytraslot_getElytraStack();
-        if (ElytraSlotUtil.isElytraLike(elytra)) {
-            holder.elytraslot_setAccessoriesElytra(elytra.copy());
-        }
+    @Override
+    public void elytraslot$setElytra(ItemStack stack) {
+        this.elytraslot$elytra = stack;
     }
 }

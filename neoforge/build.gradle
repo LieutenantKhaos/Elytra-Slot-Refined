@@ -3,41 +3,44 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
-version = mod_version
-group = mod_group_id
+repositories {
+    // Curios API (top.theillusivec4.curios) — NeoForge-only accessory mod.
+    maven {
+        name = 'Curios'
+        url = uri('https://maven.theillusivec4.top/')
+    }
+}
 
-base {
-    archivesName = "${mod_id}-neoforge-${minecraft_version}"
+dependencies {
+    // Soft compat: Trinkets Updated (universal jar, runs on NeoForge too). Required here
+    // because this module re-compiles the common sources that reference it.
+    compileOnly "eu.pb4:trinkets:${trinkets_version}"
+
+    // Soft compat: Curios. compileOnly, runtime-gated by ModList.isLoaded("curios").
+    // The full jar rather than the :api classifier, because the soft mixin that fixes
+    // shift-clicking out of the Curios slot has to reference Curios' own menu classes.
+    // All Curios references live in this module — never in common.
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 }
 
 neoForge {
     version = project.neoforge_version
-    // No parchment needed - MC 26.1 ships with real names
 
-    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    // Reference the single AT copy in the common module (it ships in the jar via
+    // commonResources at the standard META-INF path — no duplicate file needed here).
+    accessTransformers = project(':common').files('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
             client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
-
         server {
             server()
             programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-
-        data {
-            clientData()
-            programArguments.addAll '--mod', project.mod_id, '--all',
-                '--output', file('src/generated/resources/').getAbsolutePath(),
-                '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.DEBUG
+            logLevel = org.slf4j.event.Level.INFO
         }
     }
 
@@ -48,31 +51,30 @@ neoForge {
     }
 }
 
-sourceSets.main.resources {
-    srcDir('src/generated/resources')
+// The access widener is Fabric-only; keep it out of the NeoForge jar.
+processResources {
+    exclude 'elytraslot.accesswidener'
 }
 
-// Handle duplicate AT from common module
-tasks.withType(AbstractCopyTask).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-// Metadata template expansion
-var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+// Expand the mods.toml template (MDG-recommended pattern).
+var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
     var replaceProperties = [
-        minecraft_version      : minecraft_version,
-        minecraft_version_range: minecraft_version_range,
-        neoforge_version       : neoforge_version,
+        minecraft_version            : minecraft_version,
+        minecraft_version_range      : minecraft_version_range,
+        neoforge_version             : neoforge_version,
+        neoforge_version_range       : neoforge_version_range,
         neoforge_loader_version_range: neoforge_loader_version_range,
-        mod_id                 : mod_id,
-        mod_name               : mod_name,
-        mod_license            : mod_license,
-        mod_version            : mod_version,
+        mod_id                       : mod_id,
+        mod_name                     : mod_name,
+        mod_license                  : mod_license,
+        mod_version                  : mod_version,
+        mod_author                   : mod_author,
+        mod_description              : mod_description,
     ]
     inputs.properties replaceProperties
     expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
 }
 sourceSets.main.resources.srcDir generateModMetadata
 neoForge.ideSyncTask generateModMetadata
