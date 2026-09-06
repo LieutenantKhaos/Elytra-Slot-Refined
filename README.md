@@ -1,6 +1,6 @@
-# Elytra Slot Refined
+# Elytra Slot! Refined
 
-**Elytra Slot Refined** is a maintained fork of Elytra Slot focused on a cleaner,
+**Elytra Slot! Refined** is a maintained fork of Elytra Slot! focused on a cleaner,
 more vanilla-looking survival inventory layout while preserving the mod's core
 elytra behavior.
 
@@ -18,7 +18,7 @@ The built-in elytra slot is integrated directly into the survival inventory:
 
 ## Core features
 
-The upstream Elytra Slot 3.0.0 architecture is retained, including:
+The upstream Elytra Slot! 3.0.0 architecture is retained, including:
 
 - a dedicated elytra slot that leaves the chestplate slot available;
 - vanilla-style flight, durability, Mending, and equipment behavior;
