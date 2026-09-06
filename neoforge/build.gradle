@@ -56,7 +56,7 @@ processResources {
     exclude 'elytraslot.accesswidener'
 }
 
-// Expand the mods.toml template (MDG-recommended pattern).
+// Expand the mods.toml template from gradle.properties.
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
     var replaceProperties = [
         minecraft_version            : minecraft_version,
@@ -76,5 +76,6 @@ var generateModMetadata = tasks.register('generateModMetadata', ProcessResources
     from 'src/main/templates'
     into 'build/generated/sources/modMetadata'
 }
+
 sourceSets.main.resources.srcDir generateModMetadata
 neoForge.ideSyncTask generateModMetadata

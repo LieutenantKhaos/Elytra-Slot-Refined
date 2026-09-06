@@ -10,6 +10,7 @@ repositories {
         url = uri('https://api.modrinth.com/maven')
         content { includeGroup 'maven.modrinth' }
     }
+
     // ModMenu (com.terraformersmc:modmenu) for the in-game config screen.
     maven {
         name = 'TerraformersMC'
@@ -19,6 +20,7 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
+
     // No mappings line — MC 26.2 ships real names.
     implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
@@ -48,7 +50,24 @@ loom {
     }
 }
 
-// The access transformer is NeoForge-only; keep it out of the Fabric jar.
 processResources {
+    // The access transformer is NeoForge-only; keep it out of the Fabric jar.
     exclude 'META-INF/accesstransformer.cfg'
+
+    def replaceProperties = [
+        mod_id               : rootProject.mod_id,
+        mod_name             : rootProject.mod_name,
+        mod_version          : rootProject.mod_version,
+        mod_license          : rootProject.mod_license,
+        mod_author           : rootProject.mod_author,
+        mod_description      : rootProject.mod_description,
+        minecraft_version    : rootProject.minecraft_version,
+        fabric_loader_version: rootProject.fabric_loader_version
+    ]
+
+    inputs.properties replaceProperties
+
+    filesMatching('fabric.mod.json') {
+        expand replaceProperties
+    }
 }
