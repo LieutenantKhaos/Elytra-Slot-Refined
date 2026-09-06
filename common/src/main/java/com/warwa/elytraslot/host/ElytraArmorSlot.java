@@ -24,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
  */
 public final class ElytraArmorSlot extends ArmorSlot {
 
-    private static final Identifier EMPTY_ICON = ElytraSlot.id("container/slot/elytra");
+    private static final Identifier EMPTY_ICON = ElytraSlot.resourceId("container/slot/elytra");
 
     private final Player owner;
 

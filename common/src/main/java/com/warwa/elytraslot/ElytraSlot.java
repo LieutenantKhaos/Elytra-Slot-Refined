@@ -14,13 +14,27 @@ import org.slf4j.LoggerFactory;
 public final class ElytraSlot {
 
     public static final String MOD_ID = "elytra_slot_refined";
+    public static final String RESOURCE_NAMESPACE = "elytraslot";
+
     public static final Logger LOGGER = LoggerFactory.getLogger("Elytra Slot Refined");
 
     private ElytraSlot() {
     }
 
+    /**
+     * Creates identifiers belonging to Elytra Slot Refined itself, such as
+     * networking payload identifiers.
+     */
     public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    /**
+     * Creates identifiers for inherited resources that remain under the
+     * original "elytraslot" resource namespace.
+     */
+    public static Identifier resourceId(String path) {
+        return Identifier.fromNamespaceAndPath(RESOURCE_NAMESPACE, path);
     }
 
     /**
