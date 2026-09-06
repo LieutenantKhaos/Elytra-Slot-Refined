@@ -6,9 +6,9 @@
     "name": "${mod_name}",
     "description": "${mod_description}",
     "authors": ["${mod_author}"],
-    "contact": {
-		"sources": "https://github.com/LieutenantKhaos/Elytra-Slot-Refined",
-  },
+	"contact": {
+    "sources": "https://github.com/LieutenantKhaos/Elytra-Slot-Refined"
+	},
     "license": "${mod_license}",
     "environment": "*",
     "entrypoints": {
