@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class ElytraSlot {
 
-    public static final String MOD_ID = "elytraslot";
-    public static final Logger LOGGER = LoggerFactory.getLogger("elytraslot");
+    public static final String MOD_ID = "elytra_slot_refined";
+    public static final Logger LOGGER = LoggerFactory.getLogger("Elytra Slot Refined");
 
     private ElytraSlot() {
     }
@@ -32,6 +32,7 @@ public final class ElytraSlot {
         Platform.set(platform);
         ElytraSlotConfig.load(platform.configDir().resolve(MOD_ID + ".json"));
         ElytraHosts.resolve();
-        LOGGER.info("Elytra Slot initialized; active elytra host: {}", ElytraHosts.server().id());
+        LOGGER.info("Elytra Slot Refined initialized; active elytra host: {}",
+            ElytraHosts.server().id());
     }
 }

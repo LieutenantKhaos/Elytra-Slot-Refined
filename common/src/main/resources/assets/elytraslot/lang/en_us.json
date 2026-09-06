@@ -1,8 +1,8 @@
 {
     "trinkets.slot.chest.elytra": "Elytra",
     "curios.identifier.elytra": "Elytra",
-    "elytraslot.disconnect.missingMod": "This server requires the Elytra Slot mod.",
-    "elytraslot.config.title": "Elytra Slot",
+    "elytraslot.disconnect.missingMod": "This server requires the Elytra Slot Refined mod.",
+    "elytraslot.config.title": "Elytra Slot Refined",
     "elytraslot.config.showPanel": "Show elytra slot in inventory",
     "elytraslot.config.showPanel.tooltip": "Only used while Trinkets or Curios provides the elytra slot. Without them the slot is always shown. On a server, the server's setting wins.",
     "elytraslot.config.provider": "Elytra slot provider",

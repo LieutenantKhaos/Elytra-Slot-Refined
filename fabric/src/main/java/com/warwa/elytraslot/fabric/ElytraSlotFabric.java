@@ -40,7 +40,8 @@ public final class ElytraSlotFabric implements ModInitializer {
             if (!ServerPlayNetworking.canSend(handler, HostSyncPayload.TYPE)) {
                 // Literal, not a translation key: the client being kicked is by
                 // definition the one without our language file.
-                handler.disconnect(Component.literal("This server requires the Elytra Slot mod."));
+                handler.disconnect(Component.literal(
+                    "This server requires the Elytra Slot Refined mod."));
                 return;
             }
             JoinHandling.sendHostSync(handler.player);
