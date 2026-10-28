@@ -29,7 +29,19 @@ The upstream Elytra Slot! 3.0.0 architecture is retained, including:
 
 ## Requirements
 
-Minecraft **26.2**.
+Minecraft **26.3**, Java **25**, Fabric Loader **0.20.1+**, and Fabric API **0.165.0+26.3**.
+
+This branch provides the **1.1.0-beta.1 Fabric update**. Trinkets is optional:
+the built-in slot works without it. Mod Menu is optional for the configuration UI.
+The previous 26.2 release remains on `main`. NeoForge dependencies are aligned
+for 26.3, but no NeoForge release is included in this beta.
+
+Build: `gradlew.bat :fabric:build` (Java 25).
+
+Validation: Fabric build, access widener, 23 injection signatures/callsites, and
+dedicated-server initialization without accessory mods passed. Client inventory
+interaction, flight, save migration, rendering and optional integrations still
+need in-game testing.
 
 The mod is designed to be installed on both the client and server because it
 changes the player's inventory menu.

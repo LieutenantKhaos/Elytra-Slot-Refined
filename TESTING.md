@@ -13,14 +13,11 @@ again while falling.
 ## Phase A — built-in slot (vanilla BODY equipment), no accessory mods
 
 ### A1. The slot and its art
-- [ ] Open the inventory. A 32×32 panel sits immediately left of the GUI, with a
-      one-pixel gap between panel and inventory border, and an 18×18 slot recess
-      centred in it. It should look like it was cut from the vanilla inventory
-      texture — no seams, no colour mismatch, and note the highlight pixel in the
-      top-left and shadow pixel in the bottom-right of the panel interior.
+- [ ] Open the survival inventory. The elytra slot aligns with the chestplate row and offhand column.
+- [ ] The slot has a vanilla-style 18�18 recess; no external 32�32 panel is drawn in survival.
 - [ ] Empty slot shows the elytra icon.
-- [ ] Toggle the recipe book open and closed. The panel moves with the GUI and
-      stays glued to its left edge.
+- [ ] Toggle the recipe book: slot and recess remain aligned and interactive.
+- [ ] Check the separate Creative inventory layout.
 
 ### A2. Equipping — every gesture
 - [ ] Right-click an elytra in hand → it lands in the slot, plays the **elytra**

@@ -3,7 +3,7 @@ package com.warwa.elytraslot.compat.trinkets;
 import com.warwa.elytraslot.host.ElytraHost;
 import eu.pb4.trinkets.api.TrinketSlotAccess;
 import eu.pb4.trinkets.api.TrinketsApi;
-import eu.pb4.trinkets.impl.TrinketSlot;
+import eu.pb4.trinkets.impl.slots.TrinketSlot;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;

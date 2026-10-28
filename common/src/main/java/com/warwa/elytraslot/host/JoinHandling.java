@@ -78,6 +78,6 @@ public final class JoinHandling {
         if (player.getInventory().add(moved)) {
             return;
         }
-        player.drop(moved, false);
+        player.drop(moved, false, net.minecraft.util.Prediction.SERVER_ONLY);
     }
 }

@@ -1,3 +1,13 @@
+# 1.1.0-beta.1 — Minecraft 26.3 / Fabric
+
+- Target Minecraft 26.3, Fabric Loader 0.20.1, Fabric API 0.165.0+26.3 and Gradle 9.6.0.
+- Adapt dropped-item handling to the 26.3 Prediction API: server-only for join recovery and predicted for equip swaps.
+- Adapt optional Trinkets support to its 4.2.1 slot package; update compile-only compatibility dependencies.
+- Keep the standalone built-in elytra slot; Trinkets is NOT required.
+- Restrict Fabric game compatibility to ~26.3 and declare Java 25.
+- Fabric build/access-widener validation, 23 injection selector/signature/callsite checks and server initialization passed.
+- Beta: client gameplay/rendering and optional integrations require manual tests. NeoForge release not tested or uploaded.
+
 # Changelog
 
 ## 1.0.0 â€” Elytra Slot Refined

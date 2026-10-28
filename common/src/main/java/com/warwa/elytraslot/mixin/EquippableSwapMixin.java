@@ -73,7 +73,7 @@ public abstract class EquippableSwapMixin {
             ItemStack toEquip = stack.consumeAndReturn(1, player);
             player.setItemSlot(EquipmentSlot.BODY, toEquip);
             if (!player.getInventory().add(displaced)) {
-                player.drop(displaced, false);
+                player.drop(displaced, false, net.minecraft.util.Prediction.PREDICTED);
             }
             cir.setReturnValue(InteractionResult.SUCCESS.heldItemTransformedTo(stack));
         }
