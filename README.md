@@ -6,6 +6,22 @@ elytra behavior.
 
 Maintained by **LieutenantKhaos**.
 
+## Download
+
+**Latest: 1.1.0-beta.1 for Minecraft 26.3 / Fabric**
+
+[Download on CurseForge](https://www.curseforge.com/minecraft/mc-mods/elytra-slot-refined/files/9354681)
+| [All versions](https://www.curseforge.com/minecraft/mc-mods/elytra-slot-refined/files)
+| [Changelog](CHANGELOG.md)
+
+| Minecraft | Mod version | Loader | Source |
+|---|---|---|---|
+| 26.3 | 1.1.0-beta.1 | Fabric | [minecraft-26.3](https://github.com/LieutenantKhaos/Elytra-Slot-Refined/tree/minecraft-26.3) |
+| 26.2 | 1.0.0 | Fabric | [main](https://github.com/LieutenantKhaos/Elytra-Slot-Refined/tree/main) |
+
+**Trinkets is not required.** The mod includes its own dedicated elytra slot.
+
+
 ## What is refined?
 
 The built-in elytra slot is integrated directly into the survival inventory:
@@ -23,9 +39,9 @@ The upstream Elytra Slot! 3.0.0 architecture is retained, including:
 - a dedicated elytra slot that leaves the chestplate slot available;
 - vanilla-style flight, durability, Mending, and equipment behavior;
 - support for modded gliders;
-- Trinkets integration;
-- Curios integration on NeoForge;
-- Fabric and NeoForge support.
+- optional Trinkets integration;
+- optional Curios integration in the NeoForge source;
+- a Fabric 26.3 beta; NeoForge 26.3 is not validated or released.
 
 ## Requirements
 
